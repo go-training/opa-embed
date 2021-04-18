@@ -25,12 +25,14 @@ jobs:
         if: startsWith(matrix.os, 'macOS')
         run: |
           curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_darwin_amd64
+          chmod +x opa
 
       - name: Download OPA Binary
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          chmod +x opa
 
       - name: Run Testing
         run: |
-          opa test . -v
+          ./opa test . -v
