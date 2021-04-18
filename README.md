@@ -91,6 +91,8 @@ allow {
 
 ## Write Testing
 
+Please download [OPA Binary](https://www.openpolicyagent.org/docs/latest/#running-opa) first.
+
 ```rego
 package rbac.authz
 
