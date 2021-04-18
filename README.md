@@ -1,5 +1,7 @@
 # opa-demo
 
+[![Run Tests](https://github.com/go-training/opa-demo/actions/workflows/go.yml/badge.svg)](https://github.com/go-training/opa-demo/actions/workflows/go.yml)
+
 How to use Role-based access control (RBAC) with the Open Policy Agent. See the [reference guide](https://www.openpolicyagent.org/docs/latest/comparison-to-other-systems/#role-based-access-control-rbac).
 
 ## Create RBAC policy
