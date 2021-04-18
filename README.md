@@ -4,6 +4,7 @@ How to use Role-based access control (RBAC) with the Open Policy Agent. See the 
 
 ## Create RBAC policy
 
+[embedmd]:# (example.rego)
 ```rego
 package rbac.authz
 
@@ -77,7 +78,7 @@ role_permissions := {
 default allow = false
 allow {
   # lookup the list of roles for the user
-  roles := user_roles[input.user]
+  roles := user_roles[input.user[_]]
   # for each role in that list
   r := roles[_]
   # lookup the permissions list for role r
@@ -93,44 +94,50 @@ allow {
 
 Please download [OPA Binary](https://www.openpolicyagent.org/docs/latest/#running-opa) first.
 
+[embedmd]:# (example_test.rego)
 ```rego
 package rbac.authz
 
 test_design_group_kpi_editor {
-  allow with input as {"user": "design_group_kpi_editor", "action": "view_all", "object": "design"}
-  allow with input as {"user": "design_group_kpi_editor", "action": "edit", "object": "design"}
-  allow with input as {"user": "design_group_kpi_editor", "action": "view_all", "object": "system"}
-  not allow with input as {"user": "design_group_kpi_editor", "action": "edit", "object": "system"}
-  not allow with input as {"user": "design_group_kpi_editor", "action": "view_all", "object": "manufacture"}
-  not allow with input as {"user": "design_group_kpi_editor", "action": "edit", "object": "manufacture"}
+  allow with input as {"user": ["design_group_kpi_editor"], "action": "view_all", "object": "design"}
+  allow with input as {"user": ["design_group_kpi_editor"], "action": "edit", "object": "design"}
+  allow with input as {"user": ["design_group_kpi_editor"], "action": "view_all", "object": "system"}
+  not allow with input as {"user": ["design_group_kpi_editor"], "action": "edit", "object": "system"}
+  not allow with input as {"user": ["design_group_kpi_editor"], "action": "view_all", "object": "manufacture"}
+  not allow with input as {"user": ["design_group_kpi_editor"], "action": "edit", "object": "manufacture"}
 }
 
 test_system_group_kpi_editor {
-  allow with input as {"user": "system_group_kpi_editor", "action": "view_all", "object": "design"}
-  not allow with input as {"user": "system_group_kpi_editor", "action": "edit", "object": "design"}
-  allow with input as {"user": "system_group_kpi_editor", "action": "view_all", "object": "system"}
-  allow with input as {"user": "system_group_kpi_editor", "action": "edit", "object": "system"}
-  not allow with input as {"user": "system_group_kpi_editor", "action": "view_all", "object": "manufacture"}
-  not allow with input as {"user": "system_group_kpi_editor", "action": "edit", "object": "manufacture"}
+  allow with input as {"user": ["system_group_kpi_editor"], "action": "view_all", "object": "design"}
+  not allow with input as {"user": ["system_group_kpi_editor"], "action": "edit", "object": "design"}
+  allow with input as {"user": ["system_group_kpi_editor"], "action": "view_all", "object": "system"}
+  allow with input as {"user": ["system_group_kpi_editor"], "action": "edit", "object": "system"}
+  not allow with input as {"user": ["system_group_kpi_editor"], "action": "view_all", "object": "manufacture"}
+  not allow with input as {"user": ["system_group_kpi_editor"], "action": "edit", "object": "manufacture"}
 }
 
 test_manufacture_group_kpi_editor {
-  allow with input as {"user": "manufacture_group_kpi_editor", "action": "view_all", "object": "design"}
-  not allow with input as {"user": "manufacture_group_kpi_editor", "action": "edit", "object": "design"}
-  allow with input as {"user": "manufacture_group_kpi_editor", "action": "view_all", "object": "system"}
-  not allow with input as {"user": "manufacture_group_kpi_editor", "action": "edit", "object": "system"}
-  allow with input as {"user": "manufacture_group_kpi_editor", "action": "view_all", "object": "manufacture"}
-  allow with input as {"user": "manufacture_group_kpi_editor", "action": "edit", "object": "manufacture"}
+  allow with input as {"user": ["manufacture_group_kpi_editor"], "action": "view_all", "object": "design"}
+  not allow with input as {"user": ["manufacture_group_kpi_editor"], "action": "edit", "object": "design"}
+  allow with input as {"user": ["manufacture_group_kpi_editor"], "action": "view_all", "object": "system"}
+  not allow with input as {"user": ["manufacture_group_kpi_editor"], "action": "edit", "object": "system"}
+  allow with input as {"user": ["manufacture_group_kpi_editor"], "action": "view_all", "object": "manufacture"}
+  allow with input as {"user": ["manufacture_group_kpi_editor"], "action": "edit", "object": "manufacture"}
 }
 
 test_project_leader {
-  allow with input as {"user": "project_leader", "action": "view_all", "object": "design"}
-  not allow with input as {"user": "project_leader", "action": "edit", "object": "design"}
-  allow with input as {"user": "project_leader", "action": "view_all", "object": "system"}
-  not allow with input as {"user": "project_leader", "action": "edit", "object": "system"}
-  not allow with input as {"user": "project_leader", "action": "view_all", "object": "manufacture"}
-  not allow with input as {"user": "project_leader", "action": "edit", "object": "manufacture"}
-  allow with input as {"user": "project_leader", "action": "view_l3_project", "object": "manufacture"}
+  allow with input as {"user": ["project_leader"], "action": "view_all", "object": "design"}
+  not allow with input as {"user": ["project_leader"], "action": "edit", "object": "design"}
+  allow with input as {"user": ["project_leader"], "action": "view_all", "object": "system"}
+  not allow with input as {"user": ["project_leader"], "action": "edit", "object": "system"}
+  not allow with input as {"user": ["project_leader"], "action": "view_all", "object": "manufacture"}
+  not allow with input as {"user": ["project_leader"], "action": "edit", "object": "manufacture"}
+  allow with input as {"user": ["project_leader"], "action": "view_l3_project", "object": "manufacture"}
+}
+
+test_design_group_kpi_editor_and_system_group_kpi_editor {
+  allow with input as {"user": ["design_group_kpi_editor", "system_group_kpi_editor"], "action": "edit", "object": "design"}
+  allow with input as {"user": ["design_group_kpi_editor", "system_group_kpi_editor"], "action": "edit", "object": "system"}
 }
 ```
 
@@ -138,10 +145,11 @@ run test command:
 
 ```bash
 $ opa test . -v
-data.rbac.authz.test_design_group_kpi_editor: PASS (7.791292ms)
-data.rbac.authz.test_system_group_kpi_editor: PASS (4.345958ms)
-data.rbac.authz.test_manufacture_group_kpi_editor: PASS (1.754458ms)
-data.rbac.authz.test_project_leader: PASS (1.525459ms)
+data.rbac.authz.test_design_group_kpi_editor: PASS (12.345458ms)
+data.rbac.authz.test_system_group_kpi_editor: PASS (1.745375ms)
+data.rbac.authz.test_manufacture_group_kpi_editor: PASS (2.038ms)
+data.rbac.authz.test_project_leader: PASS (1.604583ms)
+data.rbac.authz.test_design_group_kpi_editor_and_system_group_kpi_editor: PASS (2.780292ms)
 --------------------------------------------------------------------------------
-PASS: 4/4
+PASS: 5/5
 ```
