@@ -147,12 +147,12 @@ test_design_group_kpi_editor_and_system_group_kpi_editor {
 run test command:
 
 ```bash
-$ opa test . -v
-data.rbac.authz.test_design_group_kpi_editor: PASS (12.345458ms)
-data.rbac.authz.test_system_group_kpi_editor: PASS (1.745375ms)
-data.rbac.authz.test_manufacture_group_kpi_editor: PASS (2.038ms)
-data.rbac.authz.test_project_leader: PASS (1.604583ms)
-data.rbac.authz.test_design_group_kpi_editor_and_system_group_kpi_editor: PASS (2.780292ms)
+$ opa test -v *.rego
+data.rbac.authz.test_design_group_kpi_editor: PASS (8.604833ms)
+data.rbac.authz.test_system_group_kpi_editor: PASS (7.260166ms)
+data.rbac.authz.test_manufacture_group_kpi_editor: PASS (2.217125ms)
+data.rbac.authz.test_project_leader: PASS (1.823833ms)
+data.rbac.authz.test_design_group_kpi_editor_and_system_group_kpi_editor: PASS (1.150791ms)
 --------------------------------------------------------------------------------
 PASS: 5/5
 ```
