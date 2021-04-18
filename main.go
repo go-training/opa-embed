@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	_ "embed"
-	"fmt"
 	"log"
 
 	"github.com/open-policy-agent/opa/rego"
@@ -28,7 +27,7 @@ func main() {
 	}
 
 	input := map[string]interface{}{
-		"user":   s.User,
+		"user":   []string{s.User},
 		"action": s.Action,
 		"object": s.Object,
 	}
@@ -43,6 +42,11 @@ func main() {
 		log.Fatalf("initial rego error: %v", err)
 	}
 
+	ok, _ := result(ctx, query, input)
+	log.Println("", ok)
+}
+
+func result(ctx context.Context, query rego.PreparedEvalQuery, input map[string]interface{}) (bool, error) {
 	results, err := query.Eval(ctx, rego.EvalInput(input))
 	if err != nil {
 		log.Fatalf("evaluation error: %v", err)
@@ -51,8 +55,7 @@ func main() {
 		// Handle undefined result.
 	} else if result, ok := results[0].Bindings["x"].(bool); !ok {
 		log.Fatalf("unexpected result type: %v", result)
-	} else {
-		// Handle result/decision.
-		fmt.Printf("%+v", results)
 	}
+
+	return results[0].Bindings["x"].(bool), nil
 }

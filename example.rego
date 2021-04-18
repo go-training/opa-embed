@@ -70,7 +70,7 @@ role_permissions := {
 default allow = false
 allow {
   # lookup the list of roles for the user
-  roles := user_roles[input.user]
+  roles := user_roles[input.user[_]]
   # for each role in that list
   r := roles[_]
   # lookup the permissions list for role r
