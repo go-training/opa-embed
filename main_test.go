@@ -14,6 +14,11 @@ var query rego.PreparedEvalQuery
 
 func setup() {
 	var err error
+	policy, err := readPolicy(policyFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	query, err = rego.New(
 		rego.Query(defaultQuery),
 		rego.Module(policyFile, string(policy)),

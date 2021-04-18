@@ -8,8 +8,6 @@ import (
 	"github.com/open-policy-agent/opa/rego"
 )
 
-//go:embed example.rego
-var policy []byte
 var policyFile = "example.rego"
 var defaultQuery = "x = data.rbac.authz.allow"
 
@@ -30,6 +28,11 @@ func main() {
 		"user":   []string{s.User},
 		"action": s.Action,
 		"object": s.Object,
+	}
+
+	policy, err := readPolicy(policyFile)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	ctx := context.TODO()
