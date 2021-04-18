@@ -5,6 +5,9 @@
 
 How to use Role-based access control (RBAC) with the Open Policy Agent. See the [reference guide](https://www.openpolicyagent.org/docs/latest/comparison-to-other-systems/#role-based-access-control-rbac).
 
+* [Chinese Blog](https://blog.wu-boy.com/2021/04/setup-rbac-role-based-access-control-using-open-policy-agent/)
+* [Chinese Video](https://www.youtube.com/watch?v=AkMVh5XRcuI)
+
 ## Create RBAC policy
 
 [embedmd]:# (example.rego)
