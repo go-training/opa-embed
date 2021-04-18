@@ -71,6 +71,34 @@ func Test_result(t *testing.T) {
 			want:    false,
 			wantErr: false,
 		},
+		{
+			name: "test_design_group_kpi_editor_and_system_group_kpi_editor_for_edit_design",
+			args: args{
+				ctx:   ctx,
+				query: query,
+				input: map[string]interface{}{
+					"user":   []string{"design_group_kpi_editor", "system_group_kpi_editor"},
+					"action": "edit",
+					"object": "design",
+				},
+			},
+			want:    true,
+			wantErr: false,
+		},
+		{
+			name: "test_design_group_kpi_editor_and_system_group_kpi_editor_for_edit_system",
+			args: args{
+				ctx:   ctx,
+				query: query,
+				input: map[string]interface{}{
+					"user":   []string{"design_group_kpi_editor", "system_group_kpi_editor"},
+					"action": "edit",
+					"object": "system",
+				},
+			},
+			want:    true,
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
