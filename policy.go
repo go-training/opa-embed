@@ -2,6 +2,11 @@
 
 package main
 
+import (
+	"io/ioutil"
+	"log"
+)
+
 func readPolicy(path string) ([]byte, error) {
 	// load policy
 	policy, err := ioutil.ReadFile(policyFile)
