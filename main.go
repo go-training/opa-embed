@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	_ "embed"
 	"log"
 
 	"github.com/open-policy-agent/opa/rego"
