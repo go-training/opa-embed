@@ -8,7 +8,7 @@ default allow = false
 
 allow {
 	# lookup the list of roles for the user
-	roles := acl.user_roles[input.user[_]]
+	roles := acl.group_roles[input.user[_]]
 
 	# for each role in that list
 	r := roles[_]

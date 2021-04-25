@@ -1,5 +1,5 @@
 {
-  "user_roles": {
+  "group_roles": {
     "admin": ["admin"],
     "quality_head_design": ["quality_head_design"],
     "quality_head_system": ["quality_head_system"],
