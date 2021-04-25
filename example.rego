@@ -1,7 +1,7 @@
 package rbac.authz
 
 # user-role assignments
-user_roles := {
+group_roles := {
 	"design_group_kpi_editor": ["kpi_editor_design", "viewer_limit_ds"],
 	"system_group_kpi_editor": ["kpi_editor_system", "viewer_limit_ds"],
 	"manufacture_group_kpi_editor": ["kpi_editor_manufacture", "viewer"],
@@ -65,7 +65,7 @@ default allow = false
 
 allow {
 	# lookup the list of roles for the user
-	roles := user_roles[input.user[_]]
+	roles := group_roles[input.user[_]]
 
 	# for each role in that list
 	r := roles[_]
