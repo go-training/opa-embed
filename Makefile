@@ -1,10 +1,10 @@
 opa_test:
 	opa test -v *.rego
 
-server_test:
-	opa test -v ./opa/*.rego
+rbac_test:
+	opa test -v ./rbac/*.rego
 
 go_test:
 	go test -v .
 
-test: server_test opa_test go_test
+test: rbac_test opa_test go_test
