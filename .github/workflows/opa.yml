@@ -38,4 +38,3 @@ jobs:
       - name: Run Testing
         run: |
           ./opa test -v *.rego
-          ./opa test -v ./rbac/*.rego
