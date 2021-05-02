@@ -9,7 +9,7 @@ import (
 	"github.com/open-policy-agent/opa/rego"
 )
 
-var policyFile = "example.rego"
+var policyFile = "policy/rbac.authz.rego"
 var defaultQuery = "x = data.rbac.authz.allow"
 
 type input struct {
