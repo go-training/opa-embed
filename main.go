@@ -9,7 +9,7 @@ import (
 	"github.com/open-policy-agent/opa/rego"
 )
 
-var policyFile = "policy/rbac.authz.rego"
+var policyPath = "policy/rbac.authz.rego"
 var defaultQuery = "x = data.rbac.authz.allow"
 
 type input struct {
@@ -31,7 +31,7 @@ func main() {
 		"object": s.Object,
 	}
 
-	p, err := policy.ReadPolicy(policyFile)
+	p, err := policy.ReadPolicy(policyPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -39,7 +39,7 @@ func main() {
 	ctx := context.TODO()
 	query, err := rego.New(
 		rego.Query(defaultQuery),
-		rego.Module(policyFile, string(p)),
+		rego.Module(policyPath, string(p)),
 	).PrepareForEval(ctx)
 
 	if err != nil {
