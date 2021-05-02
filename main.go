@@ -4,6 +4,8 @@ import (
 	"context"
 	"log"
 
+	"github.com/go-training/opa-embed/policy"
+
 	"github.com/open-policy-agent/opa/rego"
 )
 
@@ -29,7 +31,7 @@ func main() {
 		"object": s.Object,
 	}
 
-	policy, err := readPolicy(policyFile)
+	p, err := policy.ReadPolicy(policyFile)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -37,7 +39,7 @@ func main() {
 	ctx := context.TODO()
 	query, err := rego.New(
 		rego.Query(defaultQuery),
-		rego.Module(policyFile, string(policy)),
+		rego.Module(policyFile, string(p)),
 	).PrepareForEval(ctx)
 
 	if err != nil {

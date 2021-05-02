@@ -1,13 +1,13 @@
 // +build !go1.16
 
-package main
+package policy
 
 import (
 	"io/ioutil"
 	"log"
 )
 
-func readPolicy(path string) ([]byte, error) {
+func ReadPolicy(path string) ([]byte, error) {
 	// load policy
 	policy, err := ioutil.ReadFile(policyFile)
 	if err != nil {

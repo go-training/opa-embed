@@ -6,6 +6,8 @@ import (
 	"os"
 	"testing"
 
+	"github.com/go-training/opa-embed/policy"
+
 	"github.com/open-policy-agent/opa/rego"
 )
 
@@ -13,14 +15,14 @@ var query rego.PreparedEvalQuery
 
 func setup() {
 	var err error
-	policy, err := readPolicy(policyFile)
+	p, err := policy.ReadPolicy(policyFile)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	query, err = rego.New(
 		rego.Query(defaultQuery),
-		rego.Module(policyFile, string(policy)),
+		rego.Module(policyFile, string(p)),
 	).PrepareForEval(context.TODO())
 
 	if err != nil {

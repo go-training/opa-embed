@@ -1,6 +1,6 @@
 // +build go1.16
 
-package main
+package policy
 
 import (
 	_ "embed"
@@ -9,6 +9,6 @@ import (
 //go:embed example.rego
 var policy []byte
 
-func readPolicy(path string) ([]byte, error) {
+func ReadPolicy(path string) ([]byte, error) {
 	return policy, nil
 }

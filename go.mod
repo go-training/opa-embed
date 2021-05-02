@@ -1,4 +1,4 @@
-module github.com/go-training/opa-demo
+module github.com/go-training/opa-embed
 
 go 1.16
 
