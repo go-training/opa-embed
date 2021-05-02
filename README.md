@@ -12,7 +12,7 @@ How to use Role-based access control (RBAC) with the Open Policy Agent. See the 
 
 ### Create RBAC policy
 
-[embedmd]:# (example.rego)
+[embedmd]:# (policy/rbac.authz.rego)
 ```rego
 package rbac.authz
 
@@ -101,7 +101,7 @@ allow {
 
 Please download [OPA Binary](https://www.openpolicyagent.org/docs/latest/#running-opa) first.
 
-[embedmd]:# (example_test.rego)
+[embedmd]:# (policy/rbac.authz_test.rego)
 ```rego
 package rbac.authz
 
