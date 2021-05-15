@@ -47,7 +47,7 @@ func main() {
 	}
 
 	ok, _ := result(ctx, query, input)
-	log.Println("", ok)
+	log.Println(ok)
 }
 
 func result(ctx context.Context, query rego.PreparedEvalQuery, input map[string]interface{}) (bool, error) {

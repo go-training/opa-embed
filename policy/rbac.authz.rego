@@ -2,6 +2,16 @@ package rbac.authz
 
 # user-role assignments
 group_roles := {
+	"admin": ["admin"],
+	"quality_head_design": ["quality_head_design"],
+	"quality_head_system": ["quality_head_system"],
+	"quality_head_manufacture": ["quality_head_manufacture"],
+	"kpi_editor_design": ["kpi_editor_design"],
+	"kpi_editor_system": ["kpi_editor_system"],
+	"kpi_editor_manufacture": ["kpi_editor_manufacture"],
+	"viewer": ["viewer"],
+	"viewer_limit_ds": ["viewer_limit_ds"],
+	"viewer_limit_m": ["viewer_limit_m"],
 	"design_group_kpi_editor": ["kpi_editor_design", "viewer_limit_ds"],
 	"system_group_kpi_editor": ["kpi_editor_system", "viewer_limit_ds"],
 	"manufacture_group_kpi_editor": ["kpi_editor_manufacture", "viewer"],
