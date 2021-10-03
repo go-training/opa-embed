@@ -9,8 +9,10 @@ import (
 	"github.com/open-policy-agent/opa/rego"
 )
 
-var policyPath = "policy/rbac.authz.rego"
-var defaultQuery = "x = data.rbac.authz.allow"
+var (
+	policyPath   = "policy/rbac.authz.rego"
+	defaultQuery = "x = data.rbac.authz.allow"
+)
 
 type input struct {
 	User   string `json:"user"`
@@ -41,7 +43,6 @@ func main() {
 		rego.Query(defaultQuery),
 		rego.Module(policyPath, string(p)),
 	).PrepareForEval(ctx)
-
 	if err != nil {
 		log.Fatalf("initial rego error: %v", err)
 	}
